@@ -1,0 +1,81 @@
+<!-- navbar.component.html -->
+<div class="navbar-container">
+  <div class="navbar-left">
+    <a routerLink="/dashboard">
+      <img alt="" src="../../assets/logo2.png" class="logo" />
+    </a>
+  </div>
+  <div class="navbar-middle">
+    <input type="text" placeholder="Rechercher" id="navbar-search">
+  </div>
+  <div class="navbar-right">
+    <mat-icon class="navbar-icon">local_phone</mat-icon>
+    <mat-icon class="navbar-icon">email</mat-icon>
+    <mat-icon class="navbar-icon">home</mat-icon>
+    <mat-icon class="navbar-icon">account_circle</mat-icon>
+  </div>
+</div>
+<div class="background">
+  <br><br><br>
+
+  <div class="container">
+    <div class="sidebar">
+      <app-sidebaradmin></app-sidebaradmin>
+    </div>
+
+    <div class="users-container">
+      <div class="header">
+        <h2 class="text">Gestion des rendez-vous programmés</h2>
+        <div class="input-group">
+          <input type="text" placeholder="Rechercher" id="search">
+        </div>
+      </div>
+
+      <br>
+
+      <div *ngFor="let email of getEmails()" class="user-email-container">
+        <h3>Rendez-vous programmés pour {{ email }}</h3>
+        <table class="table" *ngIf="getRdvForEmail(email).length > 0; else noRdvForEmail">
+          <thead>
+            <tr>
+              <th>Numéro de devis</th>
+              <th>Type</th>
+              <th>Catégorie</th>
+              <th>Marque</th>
+              <th>Modèle</th>
+              <th>Immatriculation</th>
+              <th>Email</th>
+              <th>Email du garagiste</th>
+              <th>Devis reçu</th>
+              <th>RDV programmé</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rdv of getRdvForEmail(email)">
+              <td>{{ rdv.numdevis || 'non renseigné' }}</td>
+              <td>{{ rdv.type || 'non renseigné' }}</td>
+              <td>{{ rdv.titrepres || 'non renseigné' }}</td>
+              <td>{{ rdv.vehicule?.make || 'non renseigné' }}</td>
+              <td>{{ rdv.vehicule?.model || 'non renseigné' }}</td>
+              <td>{{ rdv.vehicule?.immatriculation || 'non renseigné' }}</td>
+              <td>{{ rdv.email || 'non renseigné' }}</td>
+              <td>{{ rdv.emailperso || 'non renseigné' }}</td>
+              <td>{{ rdv.devisrec ? 'Oui' : 'Non' }}</td>
+              <td>
+                <b>
+                  {{ rdv.datesouhaite ? (rdv.datesouhaite | date:'shortDate') : 'non renseigné' }}
+                  : {{ rdv.heuresouhaite || 'non renseigné' }}h
+                </b>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #noRdvForEmail>
+          <tr>
+            <td colspan="10" class="text-center">Aucun rendez-vous avec devis reçu trouvé pour {{ email }}.</td>
+          </tr>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

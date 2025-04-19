@@ -1,0 +1,168 @@
+
+<div class="usersignup">
+    <h2 class="tyt"><b>modifier l'utilisateur</b></h2>
+</div>
+<br />
+<br />
+
+<!-- modifadmin.component.html -->
+<div *ngIf="user">
+    <form (ngSubmit)="onSubmit()">
+      <div *ngIf="user.role === 'clientprivate'">
+        
+            <div class="form-group">
+                <label for="firstName">Nom : *</label>
+                <input id="firstName" type="text" name="nom" [(ngModel)]="formData.nom" required placeholder="Entrer votre nom">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Prénom : *</label>
+                <input id="lastName" type="text" name="prenom" [(ngModel)]="formData.prenom" required placeholder="Entrer votre prénom">
+            </div>
+            <div class="form-group">
+                <label for="phone">Téléphone : * </label>
+                <input id="phone" type="tel" name="telephone" [(ngModel)]="formData.telephone" required placeholder="Entrer votre numéro de téléphone">
+            </div>
+            <div class="form-group">
+                <label for="email">Email: *</label>
+                <input id="email" type="email" name="email" [(ngModel)]="formData.email" required placeholder="Entrer votre adresse email">
+            </div>
+            <div class="form-group">
+                <label for="datenais">Date de naissance : *</label>
+                <input id="datenais" type="date" name="datenais" [(ngModel)]="formData.datenais" required placeholder="Entrer votre date de naissance">
+            </div>
+            <div class="form-group">
+                <label for="address">Adresse : *</label>
+                <input id="address" type="text" name="adresse" [(ngModel)]="formData.adresse" required placeholder="Entrer votre adresse">
+            </div>
+            <div class="form-group">
+                <label for="postalCode">Code Postal : *</label>
+                <input id="postalCode" type="text" name="codep" [(ngModel)]="formData.codep" required placeholder="Entrer votre code postal">
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de Passe : *</label>
+                <input id="password" type="password" name="mdp" [(ngModel)]="formData.mdp" required placeholder="Entrer votre mot de passe">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirmation de Mot de Passe : *</label>
+                <input id="confirmPassword" type="password" name="cmdp" [(ngModel)]="formData.cmdp" required placeholder="Confirmer votre mot de passe">
+            </div>
+            <button type="submit">Modifier</button>
+      </div>
+        
+        <div *ngIf="user.role === 'clientpro'">
+            <div class="form-group">
+                <label for="Name">Nom : *</label>
+                <input id="Name" type="text" name="nom" [(ngModel)]="formData.nom" required placeholder="Entrer votre nom ">
+            </div>
+            <div class="form-group">
+                <label for="siret">Prénom : *</label>
+                <input id="siret" type="text" name="prenom" [(ngModel)]="formData.prenom" required placeholder="Entrer votre prénom">
+            </div>
+            <div class="form-group">
+                <label for="companyName">Nom de l'entreprise : *</label>
+                <input id="companyName" type="text" name="nomsoc" [(ngModel)]="formData.nomsoc" required placeholder="Entrer le nom de votre société">
+            </div>
+            <div class="form-group">
+                <label for="siret">Numéro de SIRET : *</label>
+                <input id="siret" type="number" name="nums" [(ngModel)]="formData.nums" required placeholder="Entrer le numéro de SIRET">
+            </div>
+            <div class="form-group">
+                <label for="interlocuteur">Nom de l'interlocuteur : *</label>
+                <input id="interlocuteur" type="text" name="nomg" [(ngModel)]="formData.nomg" required placeholder="Entrer le nom de votre interlocuteur">
+            </div>
+            <div class="form-group">
+                <label for="telClientMorale">Téléphone : *</label>
+                <input id="telClientMorale" type="tel" name="telephone" [(ngModel)]="formData.telephone" required placeholder="Entrer le numéro de téléphone">
+            </div>
+            <div class="form-group">
+                <label for="emailClientMorale">Email : *</label>
+                <input id="emailClientMorale" type="email" name="email" [(ngModel)]="formData.email" required placeholder="Entrer votre adresse email">
+            </div>
+            <div class="form-group">
+                <label for="adresseClientMorale">Adresse : *</label>
+                <input id="adresseClientMorale" type="text" name="adresse" [(ngModel)]="formData.adresse" required placeholder="Entrer votre adresse">
+            </div>
+            <div class="form-group">
+                <label for="postalCodeClientMorale">Code Postal : *</label>
+                <input id="postalCodeClientMorale" type="text" name="codep" [(ngModel)]="formData.codep" required placeholder="Entrer votre code postal">
+            </div>
+            <div class="form-group">
+                <label for="passwordClientMorale">Mot de Passe : *</label>
+                <input id="passwordClientMorale" type="password" name="mdp" [(ngModel)]="formData.mdp" required placeholder="Entrer votre mot de passe">
+            </div>
+            <div class="form-group">
+                <label for="confirmPasswordClientMorale">Confirmation de Mot de Passe : *</label>
+                <input id="confirmPasswordClientMorale" type="password" name="cmdp" [(ngModel)]="formData.cmdp" required placeholder="Confirmer votre mot de passe">
+            </div>
+            <button type="submit">Modifier</button>
+        </div>
+      <div *ngIf="user.role === 'garagiste'">
+        <div class="form-group">
+          <label for="societe">Nom de la société : * </label>
+          <input id="societe" type="text" name="nomsoc" [(ngModel)]="formData.nomsoc" required placeholder="Entrer le nom de votre société">
+        </div>
+        <div class="form-group">
+          <label for="siret">Numéro SIRET : *</label>
+          <input id="siret" type="number" name="nums" [(ngModel)]="formData.nums" required placeholder="Entre le numéro de SIRET">
+        </div>
+        <div class="form-group">
+          <label for="codeNAF">Code NAF : *</label>
+          <input id="codeNAF" type="number" name="nafc" [(ngModel)]="formData.nafc" required placeholder="Entrer le code NAF">
+        </div>
+        <div class="form-group">
+          <label for="telGaragiste">Téléphone : *</label>
+          <input id="telGaragiste" type="tel" name="telephone" [(ngModel)]="formData.telephone" required placeholder="Entrer votre numéro de téléphone">
+        </div>
+        <div class="form-group">
+          <label for="fax">Fax :</label>
+          <input id="fax" type="tel" name="fax" [(ngModel)]="formData.fax" placeholder="Entrer votre numéro de fax (optionnel)">
+        </div>
+        <div class="form-group">
+          <label for="siteWeb">Site Web :</label>
+          <input id="siteWeb" type="url" name="siteweb" [(ngModel)]="formData.website" placeholder="Entrer l'URL de votre site web (optionnel)">
+        </div>
+        <div class="form-group">
+          <label for="adresseGaragiste">Adresse : * </label>
+          <input id="adresseGaragiste" type="text" name="adresse" [(ngModel)]="formData.adresse" required placeholder="Entrer votre adresse">
+        </div>
+        <div class="form-group">
+          <label for="codePostalGaragiste">Code Postal : *</label>
+          <input id="codePostalGaragiste" type="text" name="codep" [(ngModel)]="formData.codep" required placeholder="Entrer votre code postal">
+        </div>
+        <div class="form-group">
+          <label for="civilite">Civilité:</label>
+          <select id="civilite" name="civilite" [(ngModel)]="formData.genre" required>
+              <option value="Monsieur">Monsieur</option>
+              <option value="Madame">Madame</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="nomGaragiste">Nom : *</label>
+          <input id="nomGaragiste" type="text" name="nom" [(ngModel)]="formData.nom" required placeholder="Entrer votre nom">
+        </div>
+        <div class="form-group">
+          <label for="prenomGaragiste">Prénom : *</label>
+          <input id="prenomGaragiste" type="text" name="prenom" [(ngModel)]="formData.prenom" required placeholder="Entrer votre prénom">
+        </div>
+        <div class="form-group">
+          <label for="emailGaragiste">Email: *</label>
+          <input id="emailGaragiste" type="email" name="email" [(ngModel)]="formData.email" required placeholder="Entrer votre adresse email">
+        </div>
+        <div class="form-group">
+          <label for="identifiant">Identifiant : *</label>
+          <input id="identifiant" type="number" name="identifiant" [(ngModel)]="formData.identifiant" required placeholder="Entrer votre identifiant">
+        </div>
+        <div class="form-group">
+          <label for="passwordGaragiste">Mot de Passe : *</label>
+          <input id="passwordGaragiste" type="password" name="mdp" [(ngModel)]="formData.mdp" required placeholder="Entrer votre mot de passe">
+        </div>
+        <div class="form-group">
+          <label for="confirmPasswordGaragiste">Confirmation de Mot de Passe : *</label>
+          <input id="confirmPasswordGaragiste" type="password" name="cmdp" [(ngModel)]="formData.cmdp" required placeholder="Confirmer votre mot de passe">
+        </div>
+        <button type="submit">Modifier</button>
+      </div>
+    
+    </form>
+</div>
+

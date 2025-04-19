@@ -1,0 +1,188 @@
+<div class="navbar-container">
+  <div class="navbar-left">
+    <a routerLink="/dashboard">
+      <img alt="Logo" src="../../assets/logo2.png" class="logo" />
+    </a>
+  </div>
+  <div class="navbar-middle">
+    <input type="text" placeholder="Rechercher" class="navbar-search">
+  </div>
+  <div class="navbar-right">
+    <mat-icon class="navbar-icon">local_phone</mat-icon>
+    <mat-icon class="navbar-icon">email</mat-icon>
+    <mat-icon class="navbar-icon">home</mat-icon>
+    <mat-icon class="navbar-icon">account_circle</mat-icon>
+  </div>
+</div>
+
+<div class="background">
+  <br><br><br>
+  <div class="container">
+    <div class="sidebar">
+      <app-sidebaradmin></app-sidebaradmin>
+    </div>
+    <div class="users-container">
+      <div class="header">
+        <h2 class="text">Les demandes de devis</h2>
+      </div>      <br> <br>
+      <div *ngFor="let email of getEmails()" class="user-email-container">
+        <div class="kilo">
+          <h2 class="text2">Demandes de devis pour la personne de l'{{ email }}</h2>
+        </div>
+
+        <div *ngIf="getDevisForEmail(email).length === 0" class="no-users-message">
+          Aucune demande de devis pour cet email.
+        </div>
+
+        <table *ngIf="getDevisForEmail(email).length > 0" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Numéro de devis</th>
+              <th>Date de création</th>
+              <th>Véhicule</th>
+              <th>Prestation</th>
+              <th>Devis reçu</th>
+              <th>Statut</th>
+              <th>Rdv programmé</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let devis of getDevisForEmail(email)">
+              <td>{{ devis.numdevis }}</td>
+              <td>{{ devis.dateCreation | slice:0:10 }}</td>
+              <td>
+                {{ (devis.vehicule.make || 'non renseigné') + ' - ' + (devis.vehicule.model || 'non renseigné') + ' - ' + (devis.vehicule.immatriculation || 'non renseignée') + ' - ' + (devis.vehicule.kilo || 'non renseigné') + ' km' }}
+              </td>
+              <td>
+                {{ (devis.prestation.titre || 'non renseigné') + ' - ' + (devis.prestation.selectedTypes.length > 0 ? devis.prestation.selectedTypes.join(', ') : 'Aucun type sélectionné') + ' - ' + (devis.prestation.options.length > 0 ? devis.prestation.options.join(', ') : 'Aucune option sélectionnée') + ' - ' + (devis.prestation.desc || 'Aucune description') }}
+              </td>
+              <td>{{ devis.devisrec }}</td>
+              <td>{{ devis.status }}</td>
+              <td>{{ devis.rdv }}</td>
+              <td>
+                <button class="btn-update" (click)="openUpdateOverlay(devis)">Mettre à jour</button>
+                <button class="btn-details" (click)="afficherDetails(devis)">Détails</button>
+                <button class="btn-planif" (click)="planifierRdv(devis)">Planifier un RDV</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="isOverlayVisible" class="overlay">
+  <div class="overlay-content">
+    <span class="close" (click)="closeUpdateOverlay()">&times;</span>
+    <h2>Modifier la demande de devis</h2>
+    <form (ngSubmit)="updateDevis()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="numdevis">Numéro de devis :</label>
+          <input type="text" id="numdevis" [(ngModel)]="selectedDevis.numdevis" name="numdevis" required readonly>
+        </div>
+        <div class="form-group">
+          <label for="utilisateurEmail">Email :</label>
+          <input type="email" id="utilisateurEmail" [(ngModel)]="selectedDevis.utilisateur.email" name="utilisateurEmail" required readonly>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="vehicule">Véhicule :</label>
+          <input type="text" id="vehicule" [value]="(selectedDevis.vehicule.make || 'non renseigné') + ' - ' + (selectedDevis.vehicule.model || 'non renseigné') + ' - ' + (selectedDevis.vehicule.immatriculation || 'non renseignée') + ' - ' + (selectedDevis.vehicule.kilo || 'non renseigné') + ' km'" readonly>
+        </div>
+        <div class="form-group">
+          <label for="prestation">Prestation :</label>
+          <input type="text" id="prestation" [value]="(selectedDevis.prestation.titre || 'non renseigné') + ' - ' + (selectedDevis.prestation.selectedTypes.length > 0 ? selectedDevis.prestation.selectedTypes.join(', ') : 'Aucun type sélectionné') + ' - ' + (selectedDevis.prestation.options.length > 0 ? selectedDevis.prestation.options.join(', ') : 'Aucune option sélectionnée') + ' - ' + (selectedDevis.prestation.desc || 'Aucune description')" readonly>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="status">Statut :</label>
+          <select id="status" [(ngModel)]="selectedDevis.status" name="status" required>
+            <option value="En cours validation" [selected]="selectedDevis.status === 'En cours validation'">En cours de validation</option>
+            <option value="Validé" [selected]="selectedDevis.status === 'Validé'">Validé</option>
+            <option value="Refusé" [selected]="selectedDevis.status === 'Refusé'">Refusé</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="devisrec">Etat :</label>
+          <select id="devisrec" [(ngModel)]="selectedDevis.devisrec" name="devisrec" required>
+            <option value="Reçu" [selected]="selectedDevis.devisrec === 'Reçu'">Reçu</option>
+            <option value="Pas encore reçu" [selected]="selectedDevis.devisrec === 'Pas encore reçu'">Pas encore reçu</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="rdv">Rdv programmé :</label>
+        <select id="rdv" [(ngModel)]="selectedDevis.rdv" name="rdv" required>
+          <option value="Pas encore programmé" [selected]="selectedDevis.rdv === 'Pas encore programmé'">Pas encore programmé</option>
+          <option value="Programmé à une date affichée dans vos RDV" [selected]="selectedDevis.rdv === 'Programmé à une date affichée dans vos RDV'">Programmé à une date affichée dans vos RDV</option>
+        </select>
+      </div>
+      <div class="form-buttons">
+        <button type="submit" class="btn-save">Enregistrer</button>
+        <button type="button" class="btn-cancel" (click)="closeUpdateOverlay()">Annuler</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal" [ngClass]="{ 'show-modal': showModal }">
+  <div class="modal-content">
+    <h2 class="tot">Fixer un rendez-vous</h2>
+    <form [formGroup]="addrdvForm" (ngSubmit)="submitRdv()">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Numéro de devis</label>
+          <input type="text" formControlName="numdevis" required readonly>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" formControlName="email" required placeholder="Entrer l'email de la personne">
+        </div>
+        <div class="form-group">
+          <label>Date du rendez-vous :</label>
+          <input type="date" formControlName="datesouhaite" required placeholder="Entrer la date fixée du rendez-vous">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Heure du rendez-vous :</label>
+          <input type="text" formControlName="heuresouhaite" required placeholder="Entrer l'heure fixée du rendez-vous">
+        </div>
+        <div class="form-group">
+          <label for="titrepres">Prestation : *</label>
+          <input type="text" formControlName="titrepres" required readonly>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="vehicule">Véhicule : *</label>
+          <input type="text" formControlName="vehicule" required readonly>
+        </div>
+        <div class="form-group">
+          <label>Email du garagiste</label>
+          <select formControlName="emailperso" required>
+            <option *ngFor="let email of garagisteEmails" [value]="email">{{ email }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Devis reçu</label>
+          <input type="checkbox" formControlName="devisrec">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group centered-buttons">
+          <button type="submit" class="btn-save">Ajouter RDV</button>
+          <button type="button" class="btn-cancel" (click)="closeModal()">Fermer</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

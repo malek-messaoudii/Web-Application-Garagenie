@@ -1,0 +1,510 @@
+.background {
+    background-image: url('../../assets/garage-background.jpg');
+    background-size: cover;
+    overflow-y: scroll;
+    background-position: relative;
+    background-repeat: no-repeat;
+    height: 100vh; 
+    width: 100%; 
+  }
+  
+  .container {
+      display: flex;
+    }
+    
+    .sidebar {
+      width: 20%;
+      margin-right: 10px;
+    }
+
+    
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th, table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+table th {
+  background: linear-gradient(135deg, #FFA500 0%, #f9b63b 100%);
+}
+
+table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  color: #333;
+  font-size: 24px;
+  margin: 0;
+  width: 100%;
+}
+
+
+
+.search {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 150px;
+  margin-left: 150px;
+}
+
+.b1 {
+  padding: 10px 10px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 500px;
+}
+
+.b1:hover {
+  background-color: #8f8f8f;
+}
+
+
+h3{
+  font-family: "Archivo Black", sans-serif;
+
+}
+    
+    .main-content {
+      display: flex;
+      width: 80%;
+      width: 100%;
+      height: fit-content;
+      margin-top: 50px;
+    }
+    
+    .component {
+      flex: 1;
+      margin-right: 10px;
+    }
+    
+    .component:last-child {
+      margin-right: 0;
+    }  
+    body {
+      font-family: Arial, sans-serif;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 15px 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    height: 80px;
+    margin-bottom: 0;
+    z-index: 20;
+    position: absolute;
+    width: 100%;
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 60px;
+    width: auto;
+    margin-left: 50px;
+  }
+  
+  .navbar-middle {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .navbar-search {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    outline: none;
+    transition: all 0.3s;
+  }
+  
+  .navbar-search:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-right {
+    display: flex;
+    gap: 15px;
+    margin-right: 50px;
+  }
+  
+  .navbar-icon {
+    font-size: 30px;
+    cursor: pointer;
+    transition: transform 0.3s, color 0.3s;
+  }
+  
+  .navbar-icon:hover {
+    transform: scale(1.1);
+    color: #007bff; /* Change the color on hover, adjust as needed */
+  }
+  
+  .l7 {
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  /* General styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+  }
+  
+  .background {
+    background-image: url('../../assets/garage-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; 
+    width: 100%; 
+    overflow-y: auto;
+  }
+  
+  .container {
+    display: flex;
+    height: 100%;
+  }
+  
+  
+  
+  .sidebar app-sidebaradmin {
+    width: 100%;
+  }
+  
+  
+  
+  /* Navbar styles */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    height: 80px;
+    padding: 0 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-logo {
+    height: 70px;
+  }
+  
+  .navbar-middle {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .navbar-search {
+    width: 300px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .navbar-search:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+  }
+  
+  .navbar-right {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navbar-icon {
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+    padding: 5px;
+    transition: color 0.3s, transform 0.3s;
+  }
+  
+  .navbar-icon:hover {
+    color: #007bff;
+    transform: scale(1.1);
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 1200px) {
+    .dashboard-container {
+      justify-content: center;
+    }
+  
+    .charts {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .chart-box {
+      flex: 1 1 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+    }
+  
+    .main-content {
+      width: 100%;
+    }
+  
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      height: auto;
+      padding: 10px;
+    }
+  
+    .navbar-middle {
+      text-align: left;
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    .navbar-search {
+      width: 100%;
+    }
+  }
+  
+  
+  .users-container{
+    background-color: white;
+    margin-top: 50px;
+    width: 100%;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .header{
+    background-color: #007bff;
+    border-radius: 10px;
+    padding: 10px;
+  
+  }
+  
+  .text{
+    font-family: "Archivo Black", sans-serif;
+    color: white;
+    font-size: 30px;
+    margin-top: 10px;
+  
+  }
+  
+  .table-container {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .table-container th, .table-container td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+  }
+  
+  .table-container th {
+    background-color: #007bff;
+    color: white;
+    width: 100%;
+  }
+  
+  .table-container tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .btn-accept, .btn-reject, .btn-receive {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-accept {
+    background-color: #28a745;
+    color: white;
+    width: 80px;
+  
+  }
+  
+  .btn-receive{
+    background-color: #069aef;
+    color: white;
+    width: 80px;
+  }
+  
+  .btn-reject {
+    background-color: #dc3545;
+    color: white;
+    width: 80px;
+  
+  }
+  
+  .btn-accept:hover, .btn-reject:hover, .btn-receive:hover {
+    filter: brightness(0.8);
+  }
+  
+  .no-users-message {
+    text-align: center;
+    padding: 20px;
+    color: #777777;
+    font-style: italic;
+  }
+  
+  
+  /* Styles spécifiques pour les containers de devis */
+  .devis-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .devis-details {
+    flex: 1; /* Pour occuper l'espace disponible */
+  }
+  
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.show-modal {
+    display: flex;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="checkbox"] {
+    margin-top: 5px;
+}
+
+button[type="submit"],
+button.close {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover,
+button.close:hover {
+    background-color: #0056b3;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+    }
+}
+
+#navbar-search{
+  width: 300px;
+  border-radius: 20px;
+}
+
+#search{
+  width: 200px;
+}
+
+.centered-buttons {
+  display: flex;
+  justify-content: center;
+}
+.tot{
+  color: #007bff;
+  margin-left: 180px;
+}
+.closered-button {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-left: 20px;
+  width: 100px;
+}

@@ -1,0 +1,28 @@
+
+<body>
+    <nav class="navbar">
+        <div >
+            <img alt="" src="../../assets/logo.png"  class="logo" class="navbar-logo"/>
+        </div>
+        <div class="navbar-center">
+            <div class="navbar-item">Nos promotions</div>
+            <div class="navbar-item">Nos prestations</div>
+            <div class="navbar-item">Contactez nous</div>
+        </div>
+        <div class="navbar-right">
+          <button class="navbar-toggler" type="button" (click)="toggleMenu()">menu
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+    </nav>
+    <div class="sidebar" [class.active]="menuOpen">
+        <a class="closebtn" (click)="toggleMenu()">&times;</a>
+        <a href="#">mon compte</a>
+        <a href="#">mes vehicules</a>
+        <a href="#">mes rdv</a>
+        <a href="#">mes demandes</a>
+        <a href="#">voiture de pret</a>
+      </div>
+</body>
+

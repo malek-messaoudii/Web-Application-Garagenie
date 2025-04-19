@@ -1,0 +1,65 @@
+.background {
+    background-image: url('../../assets/garage-background.jpg');
+    background-size: cover;
+    overflow-y: scroll;
+    background-position: relative;
+    background-repeat: no-repeat;
+    height: 100vh; 
+    width: 100%; 
+  }
+  
+  .content {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 20px;
+  }
+  .appointment-section {
+    background-size: cover;
+    background-position: center;
+    padding: 50px 0;
+  }
+  
+  .appointment-section .container {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+  }
+  
+  .appointment-section h2 {
+    color: #ff5733;
+    margin-bottom: 20px;
+  }
+  
+  .appointment-section p {
+    color: #333;
+    font-size: 18px;
+  }
+  
+  .btn-orange {
+    background-color: #ff5733;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 10px;
+  }
+  
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .search-bar .form-control {
+    width: auto;
+    min-width: 150px;
+  }
+  
+  .search-bar .btn-orange {
+    padding: 10px 20px;
+  }
+  .navbar-logo {
+    height: 70px; /* Ajustez cette valeur pour changer la taille de votre logo */
+  }

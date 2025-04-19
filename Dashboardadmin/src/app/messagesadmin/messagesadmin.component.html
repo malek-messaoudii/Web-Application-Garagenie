@@ -1,0 +1,60 @@
+<div class="navbar-container">
+  <div class="navbar-left">
+      <a routerLink="/dashboard">
+          <img alt="" src="../../assets/logo2.png" class="logo" />
+      </a>
+  </div>
+  <div class="navbar-middle">
+      <input type="text" placeholder="Rechercher" class="navbar-search">
+  </div>
+  <div class="navbar-right">
+    <mat-icon class="navbar-icon">local_phone</mat-icon>
+    <mat-icon class="navbar-icon">email</mat-icon>
+    <mat-icon class="navbar-icon">home</mat-icon>
+    <mat-icon class="navbar-icon">account_circle</mat-icon>
+  </div>
+</div><!-- Dans votre template Angular -->
+<div class="background">
+  <br> <br> <br>
+  <div class="container">
+    <div class="sidebar">
+      <app-sidebaradmin></app-sidebaradmin>
+    </div>
+
+    <div class="card">
+      <div class="m1">
+      <h2 class="h2">Messages</h2>
+      <div class="header">
+        <input type="text" placeholder="Rechercher" [(ngModel)]="searchTerm" (keyup)="filterForms()">
+      </div>
+    </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Numéro</th>
+            <th>Email</th>
+            <th>Messages</th>
+            <th>Suppression</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let msg of messages">
+            <td>{{ msg.prenom }}</td>
+            <td>{{ msg.nom }}</td>
+            <td>{{ msg.telephone }}</td>
+            <td>{{ msg.email }}</td>
+            <td>{{ msg.message }}</td>
+            <td>
+              <button (click)="delete(msg._id)" class="delete-btn">Supprimer</button>
+            </td>
+          </tr>
+          <tr *ngIf="messages.length === 0">
+            <td colspan="6" class="no-users-message">Aucun message reçu</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

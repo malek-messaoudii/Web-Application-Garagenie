@@ -1,0 +1,13 @@
+<div class="promotions-container">
+  <h2>NOS PROMOTIONS DU MOIS DE SEPTEMBRE</h2>
+  <div class="promotions-grid">
+    <div class="promotion-card" *ngFor="let promotion of promotions">
+      <div class="promotion-price">{{ promotion.price }}€</div>
+      <div class="promotion-description">{{ promotion.description }}</div>
+      <button class="promotion-button">J'en profite</button>
+    </div>
+  </div>
+</div>
+  
+  
+  

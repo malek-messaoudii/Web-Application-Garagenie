@@ -1,0 +1,88 @@
+<div class="navbar-container">
+  <div class="navbar-left">
+      <a routerLink="/dashboard">
+          <img alt="" src="../../assets/logo2.png" class="logo" />
+      </a>
+  </div>
+  <div class="navbar-middle">
+      <input type="text" placeholder="Rechercher" class="navbar-search">
+  </div>
+  <div class="navbar-right">
+    <mat-icon class="navbar-icon">local_phone</mat-icon>
+    <mat-icon class="navbar-icon">email</mat-icon>
+    <mat-icon class="navbar-icon">home</mat-icon>
+    <mat-icon class="navbar-icon">account_circle</mat-icon>
+  </div>
+</div>
+
+
+<div class="background">   
+  <div class="container">
+    <div class="sidebar">
+      <app-sidebaradmin></app-sidebaradmin>
+    </div>
+    <div class="main-content">
+      <div class="component">
+        <br>
+        <div class="dashboard-container">
+          <mat-toolbar class="m1">
+            <span>Admin Dashboard</span>
+          </mat-toolbar>
+
+          <div class="card">
+            <mat-card-header>
+              <mat-icon>person</mat-icon>
+              <mat-card-title>Total Visitors</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="number">3,548</div>
+            </mat-card-content>
+          </div>
+          <div class="card">
+            <mat-card-header>
+              <mat-icon>mail</mat-icon>
+              <mat-card-title>New Messages</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="number">48</div>
+            </mat-card-content>
+          </div>
+          <div class="card">
+            <mat-card-header>
+              <mat-icon>group</mat-icon>
+              <mat-card-title>Registered Users</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="number">375</div>
+            </mat-card-content>
+          </div>
+          <div class="card">
+            <mat-card-header>
+              <mat-icon>access_time</mat-icon>
+              <mat-card-title>Current Time</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="number">{{ currentTime }}</div>
+            </mat-card-content>
+          </div>
+        </div>
+
+        <div class="charts">
+          <div class="chart-box">
+            <h2>Users Activity</h2>
+            <canvas id="usersActivityChart"></canvas>
+          </div>
+          <div class="chart-box">
+            <h2>Visitors</h2>
+            <canvas id="visitorsChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <br><br><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+  

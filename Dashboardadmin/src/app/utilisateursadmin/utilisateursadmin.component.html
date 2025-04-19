@@ -1,0 +1,283 @@
+<div class="navbar-container">
+  <div class="navbar-left">
+      <a routerLink="/dashboard">
+          <img alt="" src="../../assets/logo2.png" class="logo" />
+      </a>
+  </div>
+  <div class="navbar-middle">
+      <input type="text" placeholder="Rechercher" id="navbar-search" >
+  </div>
+  <div class="navbar-right">
+    <mat-icon class="navbar-icon">local_phone</mat-icon>
+    <mat-icon class="navbar-icon">email</mat-icon>
+    <mat-icon class="navbar-icon">home</mat-icon>
+    <mat-icon class="navbar-icon">account_circle</mat-icon>
+  </div>
+</div>
+
+<div class="background">
+  <br><br><br>
+  <div class="container">
+    <div class="sidebar">
+      <app-sidebaradmin></app-sidebaradmin>
+    </div>
+    <div class="users-container">
+      <div class="header">
+        <h2>UTILISATEURS</h2>
+        <div class="input-group">
+          <input type="text" [(ngModel)]="searchTerm" (input)="filterUsers()" placeholder="Rechercher">
+        </div>
+        <button (click)="toggleForm()" class="b1">Ajouter un utilisateur </button>
+      </div>
+      <app-ajoutadmin *ngIf="showForm"></app-ajoutadmin>
+      <app-modifadmin *ngIf="selectedUser" [user]="selectedUser" (update)="updateUser($event)"></app-modifadmin>
+      <div class="table-container">
+        <div *ngFor="let role of userRoles">
+          <h3>{{ role.label }}</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>PRENOM</th>
+                <th>NOM</th>
+                <th>EMAIL</th>
+                <th>NUMÉRO</th>
+                <th>ADRESSE</th>
+                <th>RÔLE</th>
+                <th>MODIFICATION</th>
+                <th>SUPPRESSION</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of filterUsersByRole(role.key)">
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.telephone }}</td>
+                <td>{{ user.adresse }}</td>
+                <td>{{ user.role }}</td>
+                <td><button (click)="editUser(user)">Modifier</button></td>
+                <td><button (click)="removeUser(user)">Supprimer</button></td>
+              </tr>
+              <tr *ngIf="filterUsersByRole(role.key).length === 0">
+                <td colspan="8" class="no-users-message">Aucun utilisateur pour ce rôle</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pop-up pour ajouter un utilisateur -->
+<div *ngIf="showForm" class="modal-background">
+  <div class="modal-content">
+    <div>
+    <span class="close-button" (click)="toggleForm()">×</span>
+    <div>
+      <div class="usersignup">
+        <h2 class="tyt"><b>Ajouter un Utilisateur</b></h2>
+      </div>
+    </div>
+      <div class="identification">
+        <div class="dov">
+          <input type="radio" name="personneType" value="client" (change)="handlePersonTypeChange($event)" class="radio-input" checked />
+          <label for="rb1"> Vous êtes un client ?</label>
+        </div>
+        <div class="dov">
+          <input type="radio" name="personneType" value="garagiste" (change)="handlePersonTypeChange($event)" class="radio-input" />
+          <label for="rb2"> Vous êtes un garagiste ?</label>
+        </div>
+      </div>
+
+      <div class="toogle">
+        <div class="toggle-btn-group" *ngIf="selectedPersonType === 'client'">
+          <input type="radio" id="physique" name="personneCategory" value="physique" (change)="handlePersonCategoryChange($event)" checked>
+          <label for="physique" class="toggle-btn">Particulier</label>
+          <input type="radio" id="morale" name="personneCategory" value="morale" (change)="handlePersonCategoryChange($event)">
+          <label for="morale" class="toggle-btn">Entreprise</label>
+        </div>
+        <br/>
+        <div *ngIf="isClientPhysiqueSelected()">
+          <form (ngSubmit)="register($event)">
+            <!-- Client Physique -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">Nom : *</label>
+                <input id="firstName" type="text" name="nom" [(ngModel)]="formData.nom" required placeholder="Entrer votre nom">
+              </div>
+              <div class="form-group">
+                <label for="lastName">Prénom : *</label>
+                <input id="lastName" type="text" name="prenom" [(ngModel)]="formData.prenom" required placeholder="Entrer votre prénom">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Téléphone : * </label>
+                <input id="phone" type="tel" name="telephone" [(ngModel)]="formData.telephone" required placeholder="Entrer votre numéro de téléphone">
+              </div>
+              <div class="form-group">
+                <label for="email">Email: *</label>
+                <input id="email" type="email" name="email" [(ngModel)]="formData.email" required placeholder="Entrer votre adresse email">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="datenais">Date de naissance : *</label>
+                <input id="datenais" type="date" name="datenais" [(ngModel)]="formData.datenais" required placeholder="Entrer votre date de naissance">
+              </div>
+              <div class="form-group">
+                <label for="address">Adresse : *</label>
+                <input id="address" type="text" name="adresse" [(ngModel)]="formData.adresse" required placeholder="Entrer votre adresse">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="postalCode">Code Postal : *</label>
+                <input id="postalCode" type="text" name="codep" [(ngModel)]="formData.codep" required placeholder="Entrer votre code postal">
+              </div>
+              <div class="form-group">
+                <label for="password">Mot de Passe : *</label>
+                <input id="password" type="password" name="mdp" [(ngModel)]="formData.mdp" required placeholder="Entrer votre mot de passe">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="confirmPassword">Confirmation de Mot de Passe : *</label>
+                <input id="confirmPassword" type="password" name="cmdp" [(ngModel)]="formData.cmdp" required placeholder="Confirmer votre mot de passe">
+              </div>
+            </div>
+            <button type="submit">Ajouter</button>
+          </form>
+        </div>
+
+        <div *ngIf="isClientMoraleSelected()">
+          <form (ngSubmit)="register($event)" >
+            <!-- Client Morale -->
+            <div class="form-row">
+              <div class="form-group">
+                <label for="Name">Nom : *</label>
+                <input id="Name" type="text" name="nomsoc" [(ngModel)]="formData.nom" required placeholder="Entrer votre nom ">
+              </div>
+              <div class="form-group">
+                <label for="siret">Prénom : *</label>
+                <input id="siret" type="text" name="prenom" [(ngModel)]="formData.prenom" required placeholder="Entrer votre prénom">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="companyName">Nom de l'entreprise : *</label>
+                <input id="companyName" type="text" name="nomg" [(ngModel)]="formData.nomsoc" required placeholder="Entrer le nom de votre société">
+              </div>
+              <div class="form-group">
+                <label for="siret">Numéro de SIRET : *</label>
+                <input id="siret" type="number" name="nums" [(ngModel)]="formData.nums" required placeholder="Entrer le numéro de SIRET">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="interlocuteur">Nom de l'interlocuteur : *</label>
+                <input id="interlocuteur" type="text" name="prenom" [(ngModel)]="formData.nomg" required placeholder="Entrer le nom de votre interlocuteur">
+              </div>
+              <div class="form-group">
+                <label for="telClientMorale">Téléphone : *</label>
+                <input id="telClientMorale" type="tel" name="telephone" [(ngModel)]="formData.telephone" required placeholder="Entrer le numéro de téléphone">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="emailClientMorale">Email : *</label>
+                <input id="emailClientMorale" type="email" name="email" [(ngModel)]="formData.email" required placeholder="Entrer votre adresse email">
+              </div>
+              <div class="form-group">
+                <label for="adresseClientMorale">Adresse : *</label>
+                <input id="adresseClientMorale" type="text" name="adresse" [(ngModel)]="formData.adresse" required placeholder="Entrer votre adresse">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="passwordClientMorale">Mot de Passe : *</label>
+                <input id="passwordClientMorale" type="password" name="mdp" [(ngModel)]="formData.mdp" required placeholder="Entrer votre mot de passe">
+              </div>
+              <div class="form-group">
+                <label for="confirmPasswordClientMorale">Confirmation de Mot de Passe : *</label>
+                <input id="confirmPasswordClientMorale" type="password" name="cmdp" [(ngModel)]="formData.cmdp" required placeholder="Confirmer votre mot de passe">
+              </div>
+            </div>
+
+            <button type="submit">Ajouter</button>
+          </form>
+        </div>
+
+        <div *ngIf="isGaragisteSelected()">
+          <form (ngSubmit)="register($event)" >
+            <div class="form-row">
+              <div class="form-group">
+                <label for="societe">Nom de la société : * </label>
+                <input id="societe" type="text" name="nomsoc" [(ngModel)]="formData.noms" required placeholder="Entrer le nom de votre société">
+              </div>
+              <div class="form-group">
+                <label for="siret">Numéro SIRET : *</label>
+                <input id="siret" type="number" name="nums" [(ngModel)]="formData.nums" required placeholder="Entrer le numéro de SIRET">
+              </div>
+            </div>
+            <div class="form-row">
+            <div class="form-group">
+              <label for="codeNAF">Code NAF : *</label>
+              <input id="codeNAF" type="number" name="nafs" [(ngModel)]="formData.nafc" required placeholder="Entrer le code NAF">
+          </div>
+          <div class="form-group">
+            <label for="identifiant">Identifiant : *</label>
+            <input id="identifiant" type="number" name="identifiant" [(ngModel)]="formData.id" required placeholder="Entrer votre identifiant">
+        </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nom">Nom : *</label>
+                <input id="nom" type="text" name="nom" [(ngModel)]="formData.nom" required placeholder="Entrer votre nom">
+              </div>
+              <div class="form-group">
+                <label for="prenom">Prénom : *</label>
+                <input id="prenom" type="text" name="prenom" [(ngModel)]="formData.prenom" required placeholder="Entrer votre prénom">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="telephone">Téléphone : * </label>
+                <input id="telephone" type="tel" name="telephone" [(ngModel)]="formData.telephone" required placeholder="Entrer votre numéro de téléphone">
+              </div>
+              <div class="form-group">
+                <label for="emailGaragiste">Email: *</label>
+                <input id="emailGaragiste" type="email" name="email" [(ngModel)]="formData.email" required placeholder="Entrer votre adresse email">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="adresseGaragiste">Adresse : *</label>
+                <input id="adresseGaragiste" type="text" name="adresse" [(ngModel)]="formData.adresse" required placeholder="Entrer votre adresse">
+              </div>
+              <div class="form-group">
+                <label for="postalCodeGaragiste">Code Postal : *</label>
+                <input id="postalCodeGaragiste" type="text" name="codep" [(ngModel)]="formData.codep" required placeholder="Entrer votre code postal">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="passwordGaragiste">Mot de Passe : *</label>
+                <input id="passwordGaragiste" type="password" name="mdp" [(ngModel)]="formData.mdp" required placeholder="Entrer votre mot de passe">
+              </div>
+              <div class="form-group">
+                <label for="confirmPasswordGaragiste">Confirmation de Mot de Passe : *</label>
+                <input id="confirmPasswordGaragiste" type="password" name="cmdp" [(ngModel)]="formData.cmdp" required placeholder="Confirmer votre mot de passe">
+              </div>
+            </div>
+            <button type="submit">Ajouter</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,70 @@
+<div class="navbar-container">
+  <div class="navbar-left">
+    <a routerLink="/dashboard">
+      <img alt="" src="../../assets/logo2.png" class="logo" />
+    </a>
+  </div>
+  <div class="navbar-middle">
+    <input type="text" placeholder="Rechercher" class="navbar-search">
+  </div>
+  <div class="navbar-right">
+    <mat-icon class="navbar-icon">local_phone</mat-icon>
+    <mat-icon class="navbar-icon">email</mat-icon>
+    <mat-icon class="navbar-icon">home</mat-icon>
+    <mat-icon class="navbar-icon">account_circle</mat-icon>
+  </div>
+</div>
+
+<div class="background">
+  <br><br><br>
+
+  <div class="container">
+    <div class="sidebar">
+      <app-sidebaradmin></app-sidebaradmin>
+    </div>
+
+    <div class="main-content">
+      <div class="promo-container">
+        <div class="promo-header">
+          <h2>Ajouter une Promotion</h2>
+          <div>
+            <input type="number" [(ngModel)]="newPromotion.price" placeholder="Prix" required> <br> <br>
+            <select [(ngModel)]="newPromotion.prestation.titre" required>
+              <option value="" disabled selected>Sélectionner une prestation</option>
+              <option *ngFor="let prestation of prestations" [value]="prestation.titre">{{ prestation.titre }}</option>
+            </select> <br> <br>
+            <select [(ngModel)]="newPromotion.mois" required>
+              <option value="" disabled selected>Sélectionner un mois</option>
+              <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+            </select>
+          </div>
+          
+          <button (click)="addPromotion()">Ajouter</button>
+        </div>
+      
+        <div class="promo-list">
+          <h3>Liste des Promotions</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Prix</th>
+                <th>Description</th>
+                <th>Mois</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let promotion of promotions">
+                <td>{{ promotion.price }}</td>
+                <td> Remboursé sur {{ promotion.prestation.titre }}</td>
+                <td>{{ promotion.mois }}</td>
+                <td><button (click)="deletePromotion(promotion._id)">Supprimer</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

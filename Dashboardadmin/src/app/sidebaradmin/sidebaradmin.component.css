@@ -1,0 +1,73 @@
+/* Style pour la sidebar */
+.sidebar {
+    width: 270px;
+    background-color:#007bff;
+    height: calc(100vh - 50px); /* Ajustez la hauteur en fonction de la hauteur de la navbar */
+    position: fixed;
+    top: 80px; /* Ajustez cette valeur pour descendre la sidebar encore plus bas */
+    left: 0;
+    z-index: 1000;
+    padding-top: 20px;
+    transition: all 0.3s ease;
+    font-family: "Archivo Black", sans-serif;
+
+  }
+  
+  .h3{
+    font-family: "Archivo Black", sans-serif;
+  }
+  .sidebar-header {
+    margin-bottom: 30px;
+    font-family: "Archivo Black", sans-serif;
+    background-color: #f9f9f9eb;
+    width: 100px;
+    height: 40px;
+    padding-top: 5px;
+    padding-left: 15px;
+    margin-left: 70px;
+    color: black;
+    border-radius: 10px;
+  }
+  
+  .sidebar-header h3 {
+    color: black;
+    font-size: 24px;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    padding: 15px 20px;
+    text-align: left;
+    height: 50px;
+
+  }
+  .sidebar-menu li:hover {
+    padding: 15px 20px;
+    text-align: left;
+    height: 50px;
+    background-color: black;
+
+  }
+  
+  .sidebar-menu li a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    height: 20px;
+  }
+  
+  .sidebar-menu li a:hover {
+    background-color: #020a12;
+    border-radius: 4px;
+
+  }
+  
+  .sidebar-menu li.active a {
+    background-color: #1abc9c;
+    border-radius: 4px;
+  }

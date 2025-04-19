@@ -1,0 +1,14 @@
+.header {
+    background-color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
